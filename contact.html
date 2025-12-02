@@ -633,9 +633,11 @@
 
 <div class="contact">
     <div class="contact-container">
+        
+        <!-- CONTACT INFO PANEL -->
         <div class="contact-info">
             <h2>Let's get in touch</h2>
-            <p>We're open for any suggestion or just to have a chat</p>
+            <p>Contact us for installations, repairs, quotes, or general enquiries.</p>
 
             <div class="info-item">
                 <div class="info-icon">
@@ -645,7 +647,7 @@
                 </div>
                 <div class="info-content">
                     <div class="info-label">Address:</div>
-                    <div class="info-text">198 West 21th Street, Suite 721 New York NY 10016</div>
+                    <div class="info-text">Zeerust, North West, South Africa</div>
                 </div>
             </div>
 
@@ -657,7 +659,7 @@
                 </div>
                 <div class="info-content">
                     <div class="info-label">Phone:</div>
-                    <div class="info-text">+ 1235 2355 98</div>
+                    <div class="info-text">078 522 5340</div>
                 </div>
             </div>
 
@@ -669,85 +671,47 @@
                 </div>
                 <div class="info-content">
                     <div class="info-label">Email:</div>
-                    <div class="info-text">info@yoursite.com</div>
+                    <div class="info-text">reairtechnprojects@gmail.com</div>
                 </div>
             </div>
 
-            <div class="info-item">
-                <div class="info-icon">
-                    <svg viewBox="0 0 24 24">
-                        <path d="M12 2C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2zm-2 15l-5-5 1.41-1.41L10 14.17l7.59-7.59L19 8l-9 9z"/>
-                    </svg>
-                </div>
-                <div class="info-content">
-                    <div class="info-label">Website:</div>
-                    <div class="info-text">yoursite.com</div>
-                </div>
-            </div>
         </div>
 
+        <!-- CONTACT FORM -->
         <div class="contact-form">
             <h2>Get in touch</h2>
             <form>
-                <div class="form-row">
-                    <div class="form-group">
-                        <input type="text" id="firstname" placeholder="First Name">
-                    </div>
-                    <div class="form-group">
-                        <input type="text" id="surname" placeholder="Surname">
-                    </div>
+
+                <div class="form-group">
+                    <input type="text" id="fullname" placeholder="Full Name" required>
                 </div>
 
                 <div class="form-group">
-                    <input type="email" id="email" placeholder="Email Address">
+                    <input type="email" id="email" placeholder="Email Address" required>
                 </div>
 
                 <div class="form-group">
-                    <input type="tel" id="phone" placeholder="Phone Number">
+                    <input type="tel" id="phone" placeholder="Phone Number" required>
                 </div>
 
                 <div class="form-group">
-                    <input type="text" id="company" placeholder="Business/Company Name (Optional)">
-                </div>
-
-                <div class="form-group">
-                    <label for="service">What service are you interested in?</label>
-                    <select id="service">
+                    <label for="service">What service do you need?</label>
+                    <select id="service" required>
                         <option value="">Select a service...</option>
-                        <option value="service1">Service 1</option>
-                        <option value="service2">Service 2</option>
-                        <option value="service3">Service 3</option>
+                        <option value="aircon-install">Aircon Installation</option>
+                        <option value="aircon-repair">Aircon Repair / Servicing</option>
+                        <option value="cold-room">Cold Room or Freezer Room Installation</option>
+                        <option value="refrigeration">Commercial / Industrial Refrigeration</option>
+                        <option value="mechanical">Mechanical & Electrical Maintenance</option>
                     </select>
                 </div>
 
                 <div class="form-group">
-                    <label for="projecttype">Project Type</label>
-                    <select id="projecttype">
-                        <option value="">Select...</option>
-                        <option value="residential">Residential</option>
-                        <option value="commercial">Commercial</option>
-                        <option value="industrial">Industrial</option>
-                    </select>
+                    <input type="text" id="location" placeholder="Your Location (e.g. Zeerust, Mahikeng, etc.)" required>
                 </div>
 
                 <div class="form-group">
-                    <input type="text" id="location" placeholder="Property/Project Location in Zeerust or nearby">
-                </div>
-
-                <div class="form-group">
-                    <textarea id="message" placeholder="Tell us about your project - What are your goals? Any specific requirements or challenges we should know about? (Optional)"></textarea>
-                </div>
-
-                <div class="form-group">
-                    <label for="source">How did you hear about us?</label>
-                    <select id="source">
-                        <option value="">Select... (Optional)</option>
-                        <option value="google">Google Search</option>
-                        <option value="social">Social Media</option>
-                        <option value="referral">Referral</option>
-                        <option value="advertisement">Advertisement</option>
-                        <option value="other">Other</option>
-                    </select>
+                    <textarea id="message" placeholder="Describe your project or the issue you're facing"></textarea>
                 </div>
 
                 <button type="submit" class="submit-btn">
@@ -758,7 +722,9 @@
                 </button>
             </form>
         </div>
+
     </div>
 </div>
+
 </body>
 </html>
