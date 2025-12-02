@@ -19,7 +19,7 @@
             position: fixed;
             top: 0;
             width: 100%;
-            background: linear-gradient(135deg, #ceebff 0%, #ffffff 100%);
+            background: white;
             backdrop-filter: blur(10px);
             box-shadow: 0 2px 20px rgba(0, 0, 0, 0.1);
             z-index: 1000;
@@ -227,3 +227,365 @@
         });
     </script>
 
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+    <style>
+        .air-tech {
+            font-family: Arial, sans-serif;
+            background-color: #f5f5f5;
+            padding: 20px;
+        }
+
+        .gallery-container {
+            max-width: 1200px;
+            margin: 0 auto;
+        }
+
+        .gallery-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 15px;
+            padding: 20px 0;
+        }
+
+        /* Force 2x2 grid on mobile */
+        @media (max-width: 768px) {
+            .gallery-grid {
+                grid-template-columns: repeat(2, 1fr);
+                gap: 8px;
+            }
+        }
+
+        .gallery-item {
+            position: relative;
+            overflow: hidden;
+            border-radius: 1px;
+            cursor: pointer;
+            aspect-ratio: 4/3;
+            background-color: #ddd;
+        }
+
+        .gallery-item img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            transition: transform 0.3s ease;
+        }
+
+        .gallery-item:hover img {
+            transform: scale(1.05);
+        }
+
+        /* Lightbox Modal */
+        .lightbox {
+            display: none;
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background-color: rgba(0, 0, 0, 0.95);
+            z-index: 1000;
+            align-items: center;
+            justify-content: center;
+        }
+
+        .lightbox.active {
+            display: flex;
+        }
+
+        .lightbox-content {
+            position: relative;
+            max-width: 90%;
+            max-height: 90%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+
+        .lightbox-image {
+            max-width: 100%;
+            max-height: 90vh;
+            object-fit: contain;
+            border-radius: 8px;
+        }
+
+        /* Close Button */
+        .close-btn {
+            position: absolute;
+            top: 20px;
+            right: 30px;
+            width: 50px;
+            height: 50px;
+            background-color: rgba(255, 255, 255, 0.1);
+            border: none;
+            border-radius: 50%;
+            cursor: pointer;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            z-index: 1001;
+            transition: background-color 0.3s ease;
+        }
+
+        .close-btn:hover {
+            background-color: rgba(255, 255, 255, 0.2);
+        }
+
+        .close-btn::before,
+        .close-btn::after {
+            content: '';
+            position: absolute;
+            width: 25px;
+            height: 2px;
+            background-color: white;
+        }
+
+        .close-btn::before {
+            transform: rotate(45deg);
+        }
+
+        .close-btn::after {
+            transform: rotate(-45deg);
+        }
+
+        /* Navigation Arrows */
+        .nav-btn {
+            position: absolute;
+            top: 50%;
+            transform: translateY(-50%);
+            width: 60px;
+            height: 60px;
+            background-color: rgba(0, 0, 0, 0.5);
+            border: none;
+            border-radius: 50%;
+            cursor: pointer;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            z-index: 1001;
+            transition: background-color 0.3s ease;
+        }
+
+        .nav-btn:hover {
+            background-color: rgba(0, 0, 0, 0.7);
+        }
+
+        .nav-btn.prev {
+            left: 30px;
+        }
+
+        .nav-btn.next {
+            right: 30px;
+        }
+
+        .nav-btn::before {
+            content: '';
+            width: 15px;
+            height: 15px;
+            border-left: 3px solid white;
+            border-bottom: 3px solid white;
+        }
+
+        .nav-btn.prev::before {
+            transform: rotate(45deg);
+            margin-left: 5px;
+        }
+
+        .nav-btn.next::before {
+            transform: rotate(-135deg);
+            margin-right: 5px;
+        }
+
+        @media (max-width: 768px) {
+            .nav-btn {
+                width: 50px;
+                height: 50px;
+            }
+
+            .nav-btn.prev {
+                left: 10px;
+            }
+
+            .nav-btn.next {
+                right: 10px;
+            }
+
+            .close-btn {
+                top: 10px;
+                right: 10px;
+            }
+        }
+    </style>
+<div class="air-tech">
+    <div class="gallery-container">
+        <div class="gallery-grid" id="gallery">
+            <!-- Gallery items will be generated by JavaScript -->
+        </div>
+    </div>
+
+    <!-- Lightbox Modal -->
+    <div class="lightbox" id="lightbox">
+        <button class="close-btn" id="closeBtn"></button>
+        <button class="nav-btn prev" id="prevBtn"></button>
+        <div class="lightbox-content">
+            <img src="" alt="Gallery Image" class="lightbox-image" id="lightboxImage">
+        </div>
+        <button class="nav-btn next" id="nextBtn"></button>
+    </div>
+
+    <script>
+        // Sample images - replace with your actual image URLs
+        const images = [
+            'images/pj2.webp',
+            'images/pjq.webp',
+            'images/pj3.webp',
+            'images/pj4.webp',
+            'images/pjq.webp',
+            'ob1.webp',
+            'ob2.webp',
+            'Obview.webp',
+            'display.webp',
+            'display2.webp'
+        ];
+
+        const gallery = document.getElementById('gallery');
+        const lightbox = document.getElementById('lightbox');
+        const lightboxImage = document.getElementById('lightboxImage');
+        const closeBtn = document.getElementById('closeBtn');
+        const prevBtn = document.getElementById('prevBtn');
+        const nextBtn = document.getElementById('nextBtn');
+
+        let currentIndex = 0;
+
+        // Generate gallery items
+        images.forEach((src, index) => {
+            const item = document.createElement('div');
+            item.className = 'gallery-item';
+            item.innerHTML = `<img src="${src}" alt="Gallery Image ${index + 1}">`;
+            item.addEventListener('click', () => openLightbox(index));
+            gallery.appendChild(item);
+        });
+
+        // Open lightbox
+        function openLightbox(index) {
+            currentIndex = index;
+            lightboxImage.src = images[currentIndex];
+            lightbox.classList.add('active');
+            document.body.style.overflow = 'hidden';
+        }
+
+        // Close lightbox
+        function closeLightbox() {
+            lightbox.classList.remove('active');
+            document.body.style.overflow = 'auto';
+        }
+
+        // Navigate to previous image
+        function showPrevious() {
+            currentIndex = (currentIndex - 1 + images.length) % images.length;
+            lightboxImage.src = images[currentIndex];
+        }
+
+        // Navigate to next image
+        function showNext() {
+            currentIndex = (currentIndex + 1) % images.length;
+            lightboxImage.src = images[currentIndex];
+        }
+
+        // Event listeners
+        closeBtn.addEventListener('click', closeLightbox);
+        prevBtn.addEventListener('click', showPrevious);
+        nextBtn.addEventListener('click', showNext);
+
+        // Close on background click
+        lightbox.addEventListener('click', (e) => {
+            if (e.target === lightbox) {
+                closeLightbox();
+            }
+        });
+
+        // Keyboard navigation
+        document.addEventListener('keydown', (e) => {
+            if (!lightbox.classList.contains('active')) return;
+            
+            if (e.key === 'Escape') closeLightbox();
+            if (e.key === 'ArrowLeft') showPrevious();
+            if (e.key === 'ArrowRight') showNext();
+        });
+    </script>
+    </div>
+</body>
+</html>
