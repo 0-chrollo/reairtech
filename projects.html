@@ -284,15 +284,19 @@
             // Prevent negative scrolling issues
             if (currentScroll < 0) return;
             
-            // Scrolling down - hide contact bar
+            // Scrolling down - hide contact bar, navbar moves to top
             if (currentScroll > lastScroll && currentScroll > scrollThreshold) {
-                contactBar.classList.add('hide');
-                nav.style.top = "0px";
+                if (!contactBar.classList.contains('hide')) {
+                    contactBar.classList.add('hide');
+                    nav.style.top = "0px";
+                }
             } 
-            // Only show contact bar when at the very top (within contactBarHeight distance)
+            // Only show contact bar when at the very top
             else if (currentScroll <= contactBarHeight) {
-                contactBar.classList.remove('hide');
-                nav.style.top = contactBarHeight + "px";
+                if (contactBar.classList.contains('hide')) {
+                    contactBar.classList.remove('hide');
+                    nav.style.top = contactBarHeight + "px";
+                }
             }
             
             lastScroll = currentScroll;
@@ -335,7 +339,6 @@
             }
         });
     </script>
-
 
 
 
