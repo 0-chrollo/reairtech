@@ -266,6 +266,7 @@
         const navLinks = document.querySelectorAll('.nav-menu li a');
     
         let lastScroll = 0;
+        let isContactBarHidden = false;
         const scrollThreshold = 10;
         const contactBarHeight = contactBar.offsetHeight;
     
@@ -284,18 +285,20 @@
             // Prevent negative scrolling issues
             if (currentScroll < 0) return;
             
-            // Scrolling down - hide contact bar, navbar moves to top
+            // Scrolling down - hide contact bar
             if (currentScroll > lastScroll && currentScroll > scrollThreshold) {
-                if (!contactBar.classList.contains('hide')) {
+                if (!isContactBarHidden) {
                     contactBar.classList.add('hide');
                     nav.style.top = "0px";
+                    isContactBarHidden = true;
                 }
             } 
             // Only show contact bar when at the very top
             else if (currentScroll <= contactBarHeight) {
-                if (contactBar.classList.contains('hide')) {
+                if (isContactBarHidden) {
                     contactBar.classList.remove('hide');
                     nav.style.top = contactBarHeight + "px";
+                    isContactBarHidden = false;
                 }
             }
             
@@ -1001,6 +1004,11 @@
         <h3 style="margin:3vh;"><a class="linking" href="projects.html"> View Projects →</a> </h3>
       </div>
   </div>
+
+
+
+
+  
 
   <script>
       const wrapper = document.getElementById('carouselWrapper');
