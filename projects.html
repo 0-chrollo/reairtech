@@ -264,19 +264,19 @@
         const burger = document.querySelector('.burger');
         const navMenu = document.querySelector('.nav-menu');
         const navLinks = document.querySelectorAll('.nav-menu li a');
-
+    
         let lastScroll = 0;
-        const scrollThreshold = 10; // Prevents jitter from small scroll movements
+        const scrollThreshold = 10;
         const contactBarHeight = contactBar.offsetHeight;
-
+    
         // Initialize navbar position
         function initNavbar() {
             const barHeight = contactBar.offsetHeight;
             nav.style.top = barHeight + "px";
         }
-
+    
         initNavbar();
-
+    
         // Handle scroll
         function handleScroll() {
             const currentScroll = window.pageYOffset || document.documentElement.scrollTop;
@@ -284,20 +284,20 @@
             // Prevent negative scrolling issues
             if (currentScroll < 0) return;
             
-            // Scrolling down
+            // Scrolling down - hide contact bar
             if (currentScroll > lastScroll && currentScroll > scrollThreshold) {
                 contactBar.classList.add('hide');
                 nav.style.top = "0px";
             } 
-            // Scrolling up
-            else if (currentScroll < lastScroll) {
+            // Only show contact bar when at the very top (within contactBarHeight distance)
+            else if (currentScroll <= contactBarHeight) {
                 contactBar.classList.remove('hide');
                 nav.style.top = contactBarHeight + "px";
             }
             
             lastScroll = currentScroll;
         }
-
+    
         // Throttle scroll events for better performance
         let ticking = false;
         window.addEventListener('scroll', () => {
@@ -309,16 +309,16 @@
                 ticking = true;
             }
         });
-
+    
         // Handle window resize
         window.addEventListener('resize', initNavbar);
-
+    
         // Burger menu functionality
         burger.addEventListener('click', () => {
             burger.classList.toggle('active');
             navMenu.classList.toggle('active');
         });
-
+    
         // Close menu when clicking on a link
         navLinks.forEach(link => {
             link.addEventListener('click', () => {
@@ -326,7 +326,7 @@
                 navMenu.classList.remove('active');
             });
         });
-
+    
         // Close menu when clicking outside
         document.addEventListener('click', (e) => {
             if (!burger.contains(e.target) && !navMenu.contains(e.target)) {
@@ -335,9 +335,6 @@
             }
         });
     </script>
-
-
-
 
 
 
