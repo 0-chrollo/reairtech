@@ -266,7 +266,6 @@
         const navLinks = document.querySelectorAll('.nav-menu li a');
     
         let lastScroll = 0;
-        let isContactBarHidden = false;
         const scrollThreshold = 10;
         const contactBarHeight = contactBar.offsetHeight;
     
@@ -287,19 +286,13 @@
             
             // Scrolling down - hide contact bar
             if (currentScroll > lastScroll && currentScroll > scrollThreshold) {
-                if (!isContactBarHidden) {
-                    contactBar.classList.add('hide');
-                    nav.style.top = "0px";
-                    isContactBarHidden = true;
-                }
+                contactBar.classList.add('hide');
+                nav.style.top = "0";
             } 
-            // Only show contact bar when at the very top
+            // Only show contact bar when at the very top (within contactBarHeight distance)
             else if (currentScroll <= contactBarHeight) {
-                if (isContactBarHidden) {
-                    contactBar.classList.remove('hide');
-                    nav.style.top = contactBarHeight + "px";
-                    isContactBarHidden = false;
-                }
+                contactBar.classList.remove('hide');
+                nav.style.top = contactBarHeight + "px";
             }
             
             lastScroll = currentScroll;
@@ -313,7 +306,7 @@
                     handleScroll();
                     ticking = false;
                 });
-                ticking = true;
+                ticking = false;
             }
         });
     
@@ -342,6 +335,9 @@
             }
         });
     </script>
+
+
+
 
 
 
@@ -735,7 +731,7 @@
 
 
 
-
+</div>
 
 
 
@@ -950,6 +946,9 @@
           }
       }
   </style>
+
+  
+  
 <div class="sl">
   <div class="carousel-container">
     <h2 style="margin:2.5vh;" class="project">Our complete Work</h2>
@@ -1004,11 +1003,6 @@
         <h3 style="margin:3vh;"><a class="linking" href="projects.html"> View Projects →</a> </h3>
       </div>
   </div>
-
-
-
-
-  
 
   <script>
       const wrapper = document.getElementById('carouselWrapper');
